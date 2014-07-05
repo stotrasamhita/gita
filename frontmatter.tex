@@ -1,0 +1,42 @@
+% !TeX program = XeLaTeX
+% !TeX root = gitabook.tex
+\pagenumbering{Roman}
+\thispagestyle{empty}
+%\begin{titlepage}
+%\ThisCenterWallPaper{0.75}{gita.jpg}
+%\vspace*{12.5cm}\hspace{-2em}\centerline{\font\x="Sanskrit 2003:script=deva,mapping=tex-text" at 52pt \x श्रीमद्भगवद्गीता}
+%\end{titlepage}
+%\thispagestyle{empty}\clearpage
+%Separate page will be made
+\begin{titlepage}
+\vspace*{6.5cm}\centerline{\font\x="Sanskrit 2003:script=deva,mapping=tex-text" at 64pt \x श्रीमद्भगवद्गीता}
+\end{titlepage}
+\clearemptydoublepage
+%Uncomment these for producing PDF for electronic circulation
+%\begin{center}
+%
+%\vspace*{8cm}
+%
+%\setmainfont{Minion Pro}
+%{\large
+%\scshape{For Personal Use Only\\
+% Not For Commercial Printing/Distribution}
+%}
+%\end{center}
+%
+%
+%\clearemptydoublepage
+\setmainfont{Sanskrit 2003:script=deva}
+\setcounter{page}{0}
+\pagenumbering{roman}
+\pdfbookmark[2]{Contents}{Contents}
+%\thispagestyle{empty}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\begin{center}
+\tableofcontents
+\end{center}
+
+\mbox{}
+\clearpage
+\thispagestyle{empty}
+\clearemptydoublepage
