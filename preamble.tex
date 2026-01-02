@@ -1,7 +1,7 @@
 % !TeX program = XeLaTeX
 % !TeX root = gitabook.tex
 \usepackage{wallpaper}
-
+\usepackage{showkeys}
 % \setmainfont[Script=Devanagari]{Sanskrit 2003}
 \newfontscript{Devanagari}{deva,dev2}
 
@@ -62,7 +62,7 @@ citecolor=cyan,					% colour of links to bibliography
 filecolor=magenta,			% colour of file links
 urlcolor=black					% colour of external links
 ]{hyperref}
-
+\newcommand{\theHshlokacount}{\thechapter.\arabic{shlokacount}}
 %%% MISCELLANEOUS %%%
 \hbadness=10000
 \vbadness=10000

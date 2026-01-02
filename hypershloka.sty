@@ -100,13 +100,13 @@
 }
 
 \renewcommand{\nextShloka}{%
-  \stepcounter{shlokacount}\stepcounter{shlokalink}%
+  \refstepcounter{shlokacount}%
   
   % 1. Construct a UNIQUE label based on the current mode
   \ifpadaccheda
-     \def\currentLabel{track:split:\arabic{shlokalink}}%
+     \def\currentLabel{track:split:\thechapter.\arabic{shlokacount}}%
   \else
-     \def\currentLabel{track:moola:\arabic{shlokalink}}%
+     \def\currentLabel{track:moola:\thechapter.\arabic{shlokacount}}%
   \fi
   
   % 2. Write the label to the AUX file
@@ -467,6 +467,7 @@
 
 \newcommand{\chapt}[1]{%
 %\chapter[#1]{\fontspec[FakeBold=1.0,FakeStretch=1.0,Script=Devanagari,Mapping=tex-text]{Siddhanta}॥#1॥}%
+\stepcounter{chapter}
 \chapter[#1]{\fontspec[FakeBold=1.0,FakeStretch=1.0,Script=Devanagari,Mapping=tex-text]{Sanskrit 2003}॥#1॥}%
 }
 
