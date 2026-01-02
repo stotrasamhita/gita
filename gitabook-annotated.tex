@@ -31,9 +31,7 @@
 \phantomsection\label{sec:start_moola}
 \input{gita.tex}
 \closesection
-\stepcounter{chapter}
 \input{mahatmyam.tex}
-\stepcounter{chapter}
 \input{mahatmyam-varaha-puranam.tex}
 \nobreak\hyperref[sec:start_moola]{\closesection}
 \end{center}
@@ -49,6 +47,7 @@
 % \sectionmark{\mbox{}}
 \begin{center}
 \fontsize{19pt}{23pt}\selectfont
+\stepcounter{chapter}
 \input{nyasa.tex}
 \clearpage
 \phantomsection\label{sec:start_split}
@@ -63,11 +62,11 @@
 \clearemptydoublepage
 
 \part{श्लोकानुक्रमणिका}
-
+\fontsize{16pt}{18pt}\selectfont
 \input{index_moola.tex}
 
 \part{पदानुक्रमणिका}
-
+\fontsize{16pt}{18pt}\selectfont
 \input{index_word.tex}
 
 \end{document}
