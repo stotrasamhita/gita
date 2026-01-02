@@ -80,9 +80,10 @@ def parse_file_strict(filepath, mode='moola'):
                 continue
             
             if VERSE_COMMAND_PATTERN.search(line):
-                verse += 1
+                if not ('onelineshloka' in line and '*' not in line):
+                    verse += 1
                 link_id = f"track:moola:{chapter}.{verse}"
-                display_num = f"{chapter}.{verse}"
+                display_num = f"{chapter}-{verse}"
                 
                 # STRICT EXPECTATION: The content is on the NEXT line
                 try:
@@ -133,7 +134,7 @@ def parse_split_file_general(filepath):
                 words = clean_line.split()
                 
                 link_id = f"track:moola:{chapter}.{verse}"
-                display_num = f"{chapter}.{verse}"
+                display_num = f"{chapter}-{verse}"
                 
                 for w in words:
                     # NORMALIZE: Handle Anusvara -> 'm'
@@ -177,7 +178,7 @@ def generate_grouped_tex(entries, output_file, mode='list'):
             header = (
                 f"\n\\phantomsection"
                 f"\\addcontentsline{{toc}}{{chapter}}{{{char}}}" 
-                f"\n\\vspace{{1em}} {{\\Huge \\textbf{{{char}}}}} \\nopagebreak \\vspace{{0.5em}}\n"
+                f"\n\\vspace{{1em}} \\centerline{{\\Huge \\textbf{{{char}}}}} \\nopagebreak \\vspace{{0.5em}}\n"
             )
             f.write(header)            
             
@@ -186,6 +187,7 @@ def generate_grouped_tex(entries, output_file, mode='list'):
             
             if mode == 'list':
                 f.write(r"\begin{itemize}" + "\n")
+                # f.write(r"\addtolength{\itemsep}{-1ex}" + "\n")
                 for text, link, disp in items:
                     line = f"\\item {text} \\dotfill \\hyperref[{link}]{{{disp}}}\n"
                     f.write(line)
