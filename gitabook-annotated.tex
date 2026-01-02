@@ -15,11 +15,11 @@
 \addtolength{\oddsidemargin}{0.5cm}}{}
 
 \begin{document}
+\setmainfont[Script=Devanagari]{Siddhanta}
+\input{frontmatter}
 \part{मूलम्}
 \padacchedafalse  % Ensure we are in Moola mode
-\input{frontmatter}
 % \setmainfont[Script=Devanagari,FakeStretch=0.9]{Siddhanta}
-\setmainfont[Script=Devanagari]{Siddhanta}
 % \setmainfont[Script=Devanagari]{Sanskrit 2003}
 \setcounter{page}{0}
 \pagenumbering{arabic}
@@ -31,9 +31,7 @@
 \phantomsection\label{sec:start_moola}
 \input{gita.tex}
 \closesection
-\renewcommand{\thechapter}{19}
 \input{mahatmyam.tex}
-\renewcommand{\thechapter}{20}
 \input{mahatmyam-varaha-puranam.tex}
 \nobreak\hyperref[sec:start_moola]{\closesection}
 \end{center}
@@ -54,9 +52,7 @@
 \phantomsection\label{sec:start_split}
 \input{words/gita-words.tex}
 \closesection
-\renewcommand{\thechapter}{19}
 \input{mahatmyam.tex}
-\renewcommand{\thechapter}{20}
 \input{mahatmyam-varaha-puranam.tex}
 \nobreak\hyperref[sec:start_split]{\closesection}
 \end{center}
