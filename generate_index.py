@@ -12,7 +12,7 @@ OUTPUT_MOOLA_INDEX = 'index_moola.tex'
 OUTPUT_WORD_INDEX = 'index_word.tex'
 
 # Regex triggers
-VERSE_COMMAND_PATTERN = re.compile(r'\\(twolineshloka|fourlineindentedshloka|onelineshloka|shloka)(\*)?')
+VERSE_COMMAND_PATTERN = re.compile(r'^\\(twolineshloka|fourlineindentedshloka|onelineshloka|shloka)(\*)?')
 CHAPTER_PATTERN = re.compile(r'\\chapt\{')
 
 def normalize_anusvara(word):
@@ -92,6 +92,7 @@ def parse_file_strict(filepath, mode='moola'):
                 
                 if not content_line.startswith('{'):
                     print(f"Warning: Verse {display_num} skipped. Expected '{{' on next line, got: {content_line[:20]}...")
+                    verse -= 1
                     continue
 
                 if mode == 'moola':
@@ -138,8 +139,7 @@ def parse_split_file_general(filepath):
                     # NORMALIZE: Handle Anusvara -> 'm'
                     w = normalize_anusvara(w)
                     
-                    if len(w) > 1: 
-                        word_entries.append((w, link_id, display_num))
+                    word_entries.append((w, link_id, display_num))
                         
     return word_entries
 
