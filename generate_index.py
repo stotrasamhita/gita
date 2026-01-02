@@ -143,7 +143,7 @@ def parse_split_file_general(filepath):
                         
     return word_entries
 
-def generate_grouped_tex(entries, output_file, title, mode='list'):
+def generate_grouped_tex(entries, output_file, mode='list'):
     """
     Generates LaTeX output grouped by First Character.
     """
@@ -168,15 +168,18 @@ def generate_grouped_tex(entries, output_file, title, mode='list'):
     sorted_chars = sorted(groups.keys())
     
     with open(output_file, 'w', encoding='utf-8') as f:
-        # Header
-        f.write(f"\\section*{{{title}}}\n")
         if mode == 'dict':
             f.write(r"\begin{multicols}{2}" + "\n")
-            
         for char in sorted_chars:
-            # Huge Character Header
-            header = f"\n\\vspace{{1em}} {{\\Huge \\textbf{{{char}}}}} \\nopagebreak \\vspace{{0.5em}}\n"
-            f.write(header)
+            # 1. Add Anchor (for proper linking)
+            # 2. Add to TOC (as a chapter)
+            # 3. Print Visual Header
+            header = (
+                f"\n\\phantomsection"
+                f"\\addcontentsline{{toc}}{{chapter}}{{{char}}}" 
+                f"\n\\vspace{{1em}} {{\\Huge \\textbf{{{char}}}}} \\nopagebreak \\vspace{{0.5em}}\n"
+            )
+            f.write(header)            
             
             items = groups[char]
             items.sort(key=lambda x: x[0])
@@ -213,11 +216,11 @@ def generate_grouped_tex(entries, output_file, title, mode='list'):
 def main():
     print("Processing Moola (Verse Index)...")
     moola_entries = parse_file_strict(MOOLA_FILE, mode='moola')
-    generate_grouped_tex(moola_entries, OUTPUT_MOOLA_INDEX, "Verse Index (Shloka-anukramani)", mode='list')
+    generate_grouped_tex(moola_entries, OUTPUT_MOOLA_INDEX, mode='list')
     
     print("Processing Split (Word Index)...")
     word_entries = parse_split_file_general(SPLIT_FILE)
-    generate_grouped_tex(word_entries, OUTPUT_WORD_INDEX, "Word Index (Pada-anukramani)", mode='dict')
+    generate_grouped_tex(word_entries, OUTPUT_WORD_INDEX, mode='dict')
 
 if __name__ == "__main__":
     main()
