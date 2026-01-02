@@ -211,8 +211,7 @@ def generate_grouped_tex(entries, output_file, mode='list'):
     sorted_chars = sorted(groups.keys())
     
     with open(output_file, 'w', encoding='utf-8') as f:
-        if mode == 'dict':
-            f.write(r"\begin{multicols}{2}" + "\n")
+        f.write(r"\begin{multicols}{2}" + "\n")
         for char in sorted_chars:
             # 1. Add Anchor (for proper linking)
             # 2. Add to TOC (as a chapter)
@@ -229,7 +228,7 @@ def generate_grouped_tex(entries, output_file, mode='list'):
             
             if mode == 'list':
                 f.write(r"\begin{itemize}" + "\n")
-                # f.write(r"\addtolength{\itemsep}{-1ex}" + "\n")
+                f.write(r"\addtolength{\itemsep}{-0.5ex}" + "\n")
                 for text, link, disp in items:
                     line = f"\\item {text} \\dotfill \\hyperref[{link}]{{{disp}}}\n"
                     f.write(line)
@@ -252,8 +251,7 @@ def generate_grouped_tex(entries, output_file, mode='list'):
                     
                 f.write(r"\end{description}" + "\n")
 
-        if mode == 'dict':
-            f.write(r"\end{multicols}" + "\n")
+        f.write(r"\end{multicols}" + "\n")
             
     print(f"Generated {output_file}")
 
