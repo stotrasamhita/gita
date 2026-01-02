@@ -125,7 +125,8 @@ def parse_split_file_general(filepath):
                 continue
                 
             if VERSE_COMMAND_PATTERN.search(line):
-                verse += 1
+                if not ('onelineshloka' in line and '*' not in line):
+                    verse += 1
                 continue
             
             # Capture words from any line starting with { (except double danda)
