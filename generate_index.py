@@ -81,7 +81,7 @@ def parse_file_strict(filepath, mode='moola'):
             
             if VERSE_COMMAND_PATTERN.search(line):
                 verse += 1
-                link_id = f"track:moolasplit:{chapter}.{verse}"
+                link_id = f"track:moola:{chapter}.{verse}"
                 display_num = f"{chapter}.{verse}"
                 
                 # STRICT EXPECTATION: The content is on the NEXT line
@@ -131,7 +131,7 @@ def parse_split_file_general(filepath):
                 clean_line = clean_latex_text(line)
                 words = clean_line.split()
                 
-                link_id = f"track:moolasplit:{chapter}.{verse}"
+                link_id = f"track:moola:{chapter}.{verse}"
                 display_num = f"{chapter}.{verse}"
                 
                 for w in words:
