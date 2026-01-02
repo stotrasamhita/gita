@@ -5,8 +5,8 @@ import re
 from collections import defaultdict
 
 # --- Configuration ---
-MOOLA_FILE = 'gita.tex'
-SPLIT_FILE = 'words/gita-words.tex'
+MOOLA_FILE = '../gita.tex'
+SPLIT_FILE = 'gita-words.tex'
 
 OUTPUT_MOOLA_INDEX = 'index_moola.tex'
 OUTPUT_WORD_INDEX = 'index_word.tex'
