@@ -15,6 +15,38 @@ OUTPUT_WORD_INDEX = 'index_word.tex'
 VERSE_COMMAND_PATTERN = re.compile(r'^\\(twolineshloka|fourlineindentedshloka|onelineshloka|shloka)(\*)?')
 CHAPTER_PATTERN = re.compile(r'\\chapt\{')
 
+def get_anushtup_pada(text):
+    """
+    Truncates a half-verse to the first quarter (approx 8 syllables).
+    Logic: Finds the 8th syllable nucleus and cuts at the next word boundary.
+    """
+    # Regex matches: Independent Vowels OR Consonants NOT followed by Virama
+    syllable_pattern = re.compile(r'[\u0904-\u0914\u0960-\u0961]|[\u0915-\u0939](?!\u094d)')
+    
+    matches = [m for m in syllable_pattern.finditer(text)]
+    
+    # If 8 or fewer syllables, return standard text (it's already short)
+    if len(matches) <= 8:
+        return text
+        
+    # Find the end of the 8th syllable (index 7)
+    end_of_8th = matches[7].end()
+    
+    # Find the next space to avoid cutting a word in half
+    next_space = text.find(' ', end_of_8th)
+
+    # if end_of_8th != next_space:
+    #     if text[end_of_8th+1] == 'म':
+    #         print(text[:end_of_8th+1] + 'म्', end_of_8th, next_space)
+    #     elif text[end_of_8th+1] in ['र', 'स']:
+    #         print(text[:end_of_8th+1] + 'ः', end_of_8th, next_space)
+
+    if next_space != -1:
+        return text[:next_space]
+    
+    # Fallback: If no space found (huge compound word), return text
+    return text
+
 def normalize_anusvara(word):
     """
     Standardizes Sanskrit words for indexing.
@@ -47,11 +79,11 @@ def clean_latex_text(text):
     if text.startswith('{'): text = text[1:]
     if text.endswith('}'): text = text[:-1]
 
-    # 4. Remove standard LaTeX commands e.g. \textbf{...} -> ...
-    text = re.sub(r'\\[a-zA-Z]+\{([^}]*)\}', r'\1', text) 
+    # # 4. Remove standard LaTeX commands e.g. \textbf{...} -> ...
+    # text = re.sub(r'\\[a-zA-Z]+\{([^}]*)\}', r'\1', text) 
     
-    # 5. Remove punctuation (dandas, commas, etc.)
-    text = re.sub(r'[|॥,;?!.]', '', text)
+    # # 5. Remove punctuation (dandas, commas, etc.)
+    # text = re.sub(r'[|॥,;?!.]', '', text)
     
     return text.strip()
 
@@ -80,8 +112,13 @@ def parse_file_strict(filepath, mode='moola'):
                 continue
             
             if VERSE_COMMAND_PATTERN.search(line):
+                is_anushtup = True
                 if not ('onelineshloka' in line and '*' not in line):
                     verse += 1
+                if 'onelineshloka' in line and '*' not in line:
+                    is_anushtup = False
+                if 'fourlineindentedshloka' in line:
+                    is_anushtup = False
                 link_id = f"track:moola:{chapter}.{verse}"
                 display_num = f"{chapter}-{verse}"
                 
@@ -97,7 +134,11 @@ def parse_file_strict(filepath, mode='moola'):
                     continue
 
                 if mode == 'moola':
+                    if '%' in content_line:
+                        is_anushtup = False
                     clean_phrase = clean_latex_text(content_line)
+                    if is_anushtup:
+                        clean_phrase = get_anushtup_pada(clean_phrase)
                     if clean_phrase:
                         entries.append({
                             'text': clean_phrase,
