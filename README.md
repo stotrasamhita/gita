@@ -80,6 +80,22 @@ From the colophon: gratitude to the volunteers who proofread the various texts, 
 
 No separate LICENSE file is included in this repository; see the colophon in `frontmatter.tex` for the author's stated terms, and the [StotraSamhita](https://github.com/stotrasamhita) organization for related projects and [stotrasamhita.net](https://stotrasamhita.net).
 
+## 📑 Index
+
+**Jump to:** [What's here](#whats-here) · [Editions](#editions) · [Building](#building) · [Features of this edition](#features-of-this-edition) · [The preface](#the-preface) · [Acknowledgements](#acknowledgements) · [Usage](#usage)
+
+**All release PDFs:**
+
+| Edition | PDF |
+|---|---|
+| Default digital | [📄 gitabook.pdf](https://github.com/stotrasamhita/gita/blob/master/gitabook.pdf) |
+| Kindle | [📄 gitabook-kindle.pdf](https://github.com/stotrasamhita/gita/blob/master/gitabook-kindle.pdf) |
+| Kindle Scribe | [📄 gitabook-kindle-scribe.pdf](https://github.com/stotrasamhita/gita/blob/master/gitabook-kindle-scribe.pdf) |
+| Print | [📄 gitabook-print.pdf](https://github.com/stotrasamhita/gita/blob/master/gitabook-print.pdf) |
+| Annotated (mūlam + padacchheda) | [📄 words/gitabook-annotated.pdf](https://github.com/stotrasamhita/gita/blob/master/words/gitabook-annotated.pdf) |
+
+**Read it online, in multiple scripts:** [stotrasamhita.github.io/gita](https://stotrasamhita.github.io/gita/) — the full text, with a live Devanāgarī/Tamil/Telugu/Kannada/Malayalam/IAST script switcher.
+
 ---
 
 *The README.md files on this repo were generated and beautified with Claude.*
