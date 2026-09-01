@@ -79,3 +79,7 @@ From the colophon: gratitude to the volunteers who proofread the various texts, 
 ## Usage
 
 No separate LICENSE file is included in this repository; see the colophon in `frontmatter.tex` for the author's stated terms, and the [StotraSamhita](https://github.com/stotrasamhita) organization for related projects and [stotrasamhita.net](https://stotrasamhita.net).
+
+---
+
+*The README.md files on this repo were generated and beautified with Claude.*
