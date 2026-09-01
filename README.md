@@ -38,11 +38,11 @@ family of Sanskrit-text projects.
 
 | Source | Output | Notes |
 |---|---|---|
-| `gitabook.tex` | `gitabook.pdf` | Default digital edition (twoside, ~A5, Sanskrit 2003 font). |
-| `gitabook-kindle.tex` | `gitabook-kindle.pdf` | Kindle-sized (144×192mm), Siddhānta font, includes the Varāha Purāṇa māhātmyam. |
-| `gitabook-kindle-scribe.tex` | `gitabook-kindle-scribe.pdf` | Larger page for the Kindle Scribe's screen. |
-| `gitabook-print.tex` | `gitabook-print.pdf` | Print-oriented margins, includes the Varāha Purāṇa māhātmyam. |
-| `words/gitabook-annotated.tex` | `words/gitabook-annotated.pdf` | The mūlam + padacchheda cross-linked edition. |
+| `gitabook.tex` | [`gitabook.pdf`](https://github.com/stotrasamhita/gita/blob/master/gitabook.pdf) | Default digital edition (twoside, ~A5, Sanskrit 2003 font). |
+| `gitabook-kindle.tex` | [`gitabook-kindle.pdf`](https://github.com/stotrasamhita/gita/blob/master/gitabook-kindle.pdf) | Kindle-sized (144×192mm), Siddhānta font, includes the Varāha Purāṇa māhātmyam. |
+| `gitabook-kindle-scribe.tex` | [`gitabook-kindle-scribe.pdf`](https://github.com/stotrasamhita/gita/blob/master/gitabook-kindle-scribe.pdf) | Larger page for the Kindle Scribe's screen. |
+| `gitabook-print.tex` | [`gitabook-print.pdf`](https://github.com/stotrasamhita/gita/blob/master/gitabook-print.pdf) | Print-oriented margins, includes the Varāha Purāṇa māhātmyam. |
+| `words/gitabook-annotated.tex` | [`words/gitabook-annotated.pdf`](https://github.com/stotrasamhita/gita/blob/master/words/gitabook-annotated.pdf) | The mūlam + padacchheda cross-linked edition. |
 
 Each edition `\input`s `nyasa.tex`, then `gita.tex`, then `mahatmyam.tex` (and, in the kindle/print editions, `mahatmyam-varaha-puranam.tex` as well), and closes with `gsa.tex`.
 
