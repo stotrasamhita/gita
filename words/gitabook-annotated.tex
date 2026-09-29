@@ -14,6 +14,37 @@
 \addtolength{\evensidemargin}{-0.5cm}
 \addtolength{\oddsidemargin}{0.5cm}}{}
 
+%%% INDEX STYLE (used by index_moola.tex / index_word.tex from generate_index.py) %%%
+\usepackage{xcolor,tikz}
+\definecolor{idxtile}{HTML}{243266}     % indigo: letter tiles
+\definecolor{idxtiletext}{HTML}{FBF6EC} % cream: letter on the tile
+\definecolor{idxlink}{HTML}{4A1B4E}     % aubergine: link numerals and part titles
+\definecolor{idxlinkbg}{HTML}{F1E6F0}   % pale aubergine: link boxes
+\definecolor{idxgold}{HTML}{B8923F}     % gold: rules around the part titles
+
+% Part title on the first index page (instead of a separate \part page); same ToC entry as \part
+\newcommand{\idxrule}{{\color{idxgold}\rule[.3em]{.18\linewidth}{.5pt}\,\raisebox{.18em}{\tikz\fill[idxgold](0,0)circle(1.8pt);}\,\rule[.3em]{.18\linewidth}{.5pt}}}
+\newcommand{\indexpart}[1]{%
+  \clearpage\refstepcounter{part}\addcontentsline{toc}{part}{\thepart\hspace{1em}#1}\markboth{}{}%
+  \begin{center}\idxrule\\[.3em]
+  {\color{idxlink}\fontspec[FakeBold=1.0,Script=Devanagari]{Sanskrit 2003}\fontsize{32pt}{38pt}\selectfont #1}\\[.2em]
+  \idxrule\end{center}\vspace{.5em}}
+
+% Letter heading: letter on an indigo tile with small rounded corners
+\newcommand{\indexletter}[1]{\par\vspace{.8em}%
+  \centerline{\tikz[baseline=(L.base)]\node[rounded corners=2.5pt,fill=idxtile,text=idxtiletext,inner sep=0pt,
+    minimum size=1.9em,font=\fontsize{26pt}{26pt}\bfseries\selectfont] (L) {\raisebox{.1em}{#1}};}\nopagebreak\vspace{-.6\baselineskip}}
+
+% Verse links: numerals in a pale-aubergine box
+\newcommand{\idxref}[2]{\hyperref[#1]{\tikz[baseline=(t.base)]\node[fill=idxlinkbg,text=idxlink,rounded corners=2pt,
+  inner xsep=2pt,inner ysep=1pt] (t) {#2};}}
+
+% Verse-index list: no bullets, hanging indent; if the number doesn't fit, the leaders and number move to the next line
+\newenvironment{indexlist}{\list{}{\leftmargin=1em\itemindent=-1em\labelwidth=0pt\labelsep=0pt}%
+  \addtolength{\itemsep}{-0.5ex}\parfillskip=0pt\relax
+  \renewcommand{\dotfill}{\unskip\nobreak\hfil\penalty100\hskip.3em\hbox{}\nobreak
+    \leaders\hbox to .44em{\hss.\hss}\hskip0pt plus 1fill\kern2pt\relax}}{\endlist}
+
 \begin{document}
 \setmainfont[Script=Devanagari]{Siddhanta}
 \input{../frontmatter}
@@ -164,7 +195,7 @@
 \end{center}
 
 
-\part{श्लोकानुक्रमणिका}
+\indexpart{श्लोकानुक्रमणिका}
 \begingroup
 \setmainfont[Script=Devanagari,Mapping=devanagarinumerals,Scale=1.2]{Adishila}
 \fontsize{16pt}{18pt}\selectfont
@@ -174,8 +205,9 @@
 
 \endgroup
 
-\part{पदानुक्रमणिका}
+\indexpart{पदानुक्रमणिका}
 \begingroup
+\raggedright % don't stretch the spaces between link boxes
 \setmainfont[Script=Devanagari,Mapping=devanagarinumerals,Scale=1.2]{Adishila}
 \fontsize{16pt}{18pt}\selectfont
 \input{index_word.tex}

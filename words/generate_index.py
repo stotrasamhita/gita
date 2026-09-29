@@ -215,24 +215,23 @@ def generate_grouped_tex(entries, output_file, mode='list'):
         for char in sorted_chars:
             # 1. Add Anchor (for proper linking)
             # 2. Add to TOC (as a chapter)
-            # 3. Print Visual Header
+            # 3. Print Visual Header (\indexletter, \indexlist and \idxref are defined in gitabook-annotated.tex)
             header = (
                 f"\n\\phantomsection"
-                f"\\addcontentsline{{toc}}{{chapter}}{{{char}}}" 
-                f"\n\\vspace{{1em}} \\centerline{{\\Huge \\textbf{{{char}}}}} \\nopagebreak \\vspace{{0.5em}}\n"
+                f"\\addcontentsline{{toc}}{{chapter}}{{{char}}}"
+                f"\n\\indexletter{{{char}}}\n"
             )
-            f.write(header)            
-            
+            f.write(header)
+
             items = groups[char]
             items.sort(key=lambda x: x[0])
-            
+
             if mode == 'list':
-                f.write(r"\begin{itemize}" + "\n")
-                f.write(r"\addtolength{\itemsep}{-0.5ex}" + "\n")
+                f.write(r"\begin{indexlist}" + "\n")
                 for text, link, disp in items:
-                    line = f"\\item {text} \\dotfill \\hyperref[{link}]{{{disp}}}\n"
+                    line = f"\\item {text} \\dotfill \\idxref{{{link}}}{{{disp}}}\n"
                     f.write(line)
-                f.write(r"\end{itemize}" + "\n")
+                f.write(r"\end{indexlist}" + "\n")
                 
             elif mode == 'dict':
                 f.write(r"\begin{description}" + "\n")
@@ -246,7 +245,7 @@ def generate_grouped_tex(entries, output_file, mode='list'):
                 # Sort words within the group
                 for word in sorted(unique_words.keys()):
                     refs = unique_words[word]
-                    links_str = ", ".join([f"\\hyperref[{uid}]{{{did}}}" for uid, did in refs])
+                    links_str = ", ".join([f"\\idxref{{{uid}}}{{{did}}}" for uid, did in refs])
                     f.write(f"\\item[{word}] {links_str}\n")
                     
                 f.write(r"\end{description}" + "\n")
